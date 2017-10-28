@@ -3,7 +3,7 @@
    const messageShowTimeout = 500;
 
    let lastScrollTop = 0;
-   let displaying = false;
+   let displayOnce = false;
    let pageLoad = false;
 
   // Elements
@@ -38,17 +38,19 @@
       .css('opacity', 1)
       .addClass('fadeInUp')
       .fadeIn();
-    displaying = false;
   }
 
   const displayMessagesInSequence = () => {
-    displaying = true;
+    displayOnce = true;
     let messageCounter = 1;
     $.each(elems.messagesContainer, (index, messageContainer) => {
-      setTimeout(() => showMessage(messageContainer), (messageCounter * messageShowTimeout));
+      // Show Message(s)
+      setTimeout(() => showMessage(messageContainer), messageCounter * messageShowTimeout);
+      // Increment counter based on message inserted.
       messageCounter += $(messageContainer).find('.message__content').length;
     });
-    setTimeout(displayNextSlider, (messageCounter) * messageShowTimeout);
+    // Display next slider after all message are displayed
+    setTimeout(displayNextSlider, messageCounter * messageShowTimeout);
   }
 
   const showMessage = (messages, index) => {
@@ -59,12 +61,17 @@
       .css('opacity', 1)
       .addClass('fadeInUp')
       .fadeIn(), (index + messageShowTimeout));
-
-    $.each(messageList, (index, message) => {
-      setTimeout(() => $(message)
+      
+      $.each(messageList, (index, message) => {
+        setTimeout(() => $(message)
         .css('opacity', 1)
         .addClass('fadeInUp')
         .fadeIn(), (index) * messageShowTimeout);
+
+        setTimeout(() => $('html')
+          .animate({
+            scrollTop: ($(message).position().top - 300)
+          }, messageShowTimeout), (index) * messageShowTimeout);
     });
   }
 
@@ -75,7 +82,7 @@
   }
 
   const handleScroll = () => {
-    if(displaying) return;
+    if(displayOnce) return;
     
     displayMessagesInSequence();
   }
