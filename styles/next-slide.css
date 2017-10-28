@@ -1,0 +1,39 @@
+.next-content {
+  display: none;
+  width: 100%;
+  margin-top: 100px;
+  padding-top: 100px;
+}
+
+.panel {
+  color: #3B3454;
+  width: 50%;
+  float: left;
+  display: none; 
+}
+.panel__content {
+  color: #3B3454;
+  padding: 0 115px 0px 200px;;
+}
+.panel img {
+  width: 80%;
+  height: calc(100% - 50px);
+}
+.panel h1.title {
+  font-weight: 800;
+  padding: 50px 105px 20px 200px;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 1170px) {
+  .panel h1.title {
+    padding: 50px 75px 20px 100px;
+    font-size: 2.4em;
+  }
+  .panel__content {
+    padding: 0 175px 0px 100px;;
+  }
+  .panel img {
+    width: 90%;
+  }
+}

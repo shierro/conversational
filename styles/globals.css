@@ -1,0 +1,65 @@
+/**
+ * Reusable Classes
+**/
+.left {
+  margin-right: auto;
+  text-align: left;
+}
+.right {
+  margin-left: auto !important;
+  text-align: right;
+}
+.center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.main-content {
+  margin-top: 100px;
+  padding-top: 100px;
+  max-width: 650px;
+}
+
+body {
+  margin: 0;
+  background-color: #CFEFEC;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/**
+ * Sticky Header Block
+**/
+.header {
+  z-index: 1;
+  height: 100px;
+  top: 0;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  background-color: #CFEFEC;
+}
+.header__content {
+  margin: 30px;
+  display: inline-block;
+}
+.request-demo__btn {
+  background-color: #e21d5c;
+  border-radius: 20px;
+  padding: 12px 20px;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  font-size: 0.8em;
+  font-weight: 800;
+}
+.logo {
+  height: 40px;
+  width: 40px;
+  vertical-align: middle;
+}
+.logo__text {
+  vertical-align: middle;
+  font-weight: 800;
+  font-size: 1.2em;
+  color: #3B3454;
+}
