@@ -1,5 +1,7 @@
 'use strict';
  $(document).ready(() => {
+   const messageShowTimeout = 500;
+
    let lastScrollTop = 0;
    let displaying = false;
    let pageLoad = false;
@@ -34,7 +36,7 @@
   const displayNextSlider = () => {
     elems.nextSlider
       .css('opacity', 1)
-      .addClass('animated fadeInUp')
+      .addClass('fadeInUp')
       .fadeIn();
     displaying = false;
   }
@@ -43,34 +45,30 @@
     displaying = true;
     let messageCounter = 1;
     $.each(elems.messagesContainer, (index, messageContainer) => {
-      console.log(messageCounter)
-      setTimeout(() => showMessage(messageContainer), (messageCounter * 1000));
+      setTimeout(() => showMessage(messageContainer), (messageCounter * messageShowTimeout));
       messageCounter += $(messageContainer).find('.message__content').length;
     });
-    setTimeout(displayNextSlider, (messageCounter - 1) * 1000);
+    setTimeout(displayNextSlider, (messageCounter) * messageShowTimeout);
   }
 
   const showMessage = (messages, index) => {
     const messageContainer = $(messages);
     const icon = messageContainer.find('.message__icon');
     const messageList = messageContainer.find('.message__content');
-    if (icon.css('opacity') == 0) {
-      setTimeout(() => icon
-        .css('opacity', 1)
-        .addClass('animated fadeInUp')
-        .fadeIn(), (index + 1000));
-    }
+    setTimeout(() => icon
+      .css('opacity', 1)
+      .addClass('fadeInUp')
+      .fadeIn(), (index + messageShowTimeout));
 
     $.each(messageList, (index, message) => {
       setTimeout(() => $(message)
         .css('opacity', 1)
-        .addClass('animated fadeInUp')
-        .fadeIn(), (index) * 1000);
+        .addClass('fadeInUp')
+        .fadeIn(), (index) * messageShowTimeout);
     });
   }
 
   const handlePageLoad = () => {
-    console.log('handlePageLoad')
     const firstMessage = elems.messagesContainer[0];
     showMessage(firstMessage);
     return pageLoad = true;
@@ -79,7 +77,6 @@
   const handleScroll = () => {
     if(displaying) return;
     
-    console.log('handle scroll!')
     displayMessagesInSequence();
   }
 
